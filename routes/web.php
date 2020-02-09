@@ -16,3 +16,11 @@ Route::redirect('/', '/home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/add-to-cart/{product}', 'CartController@add_item')->name('cart.add')->middleware('auth');
+
+Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');
+
+Route::get('/cart/destroy/{cartItemId}', 'CartController@delete')->name('cart.destroy')->middleware('auth');
+
+Route::get('/cart/update/{cartItemId}', 'CartController@update')->name('cart.update')->middleware('auth');
