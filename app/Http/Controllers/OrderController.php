@@ -55,6 +55,22 @@ class OrderController extends Controller
         $order->shipping_phone = $request->input('shipping_phone');
         $order->shipping_zipcode = $request->input('shipping_zipcode');
 
+        if (!$request->has('billing_fullname')){
+            $order->billing_fullname = $request->input('shipping_fullname');
+            $order->billing_state = $request->input('shipping_state');
+            $order->billing_city = $request->input('shipping_city');
+            $order->billing_address = $request->input('shipping_address');
+            $order->billing_phone = $request->input('shipping_phone');
+            $order->billing_zipcode = $request->input('shipping_zipcode');
+        }else{
+            $order->billing_fullname = $request->input('billing_fullname');
+            $order->billing_state = $request->input('billing_state');
+            $order->billing_city = $request->input('billing_city');
+            $order->billing_address = $request->input('billing_address');
+            $order->billing_phone = $request->input('billing_phone');
+            $order->billing_zipcode = $request->input('billing_zipcode');
+        }
+
         $order->grand_total = \Cart::session(auth()->id())->getTotal();
         $order->item_count = \Cart::session(auth()->id())->getContent()->count();
 
@@ -62,7 +78,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        return back(); 
+        dd('order created',$order);
     }
 
     /**
