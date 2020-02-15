@@ -24,3 +24,7 @@ Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('aut
 Route::get('/cart/destroy/{cartItemId}', 'CartController@delete')->name('cart.destroy')->middleware('auth');
 
 Route::get('/cart/update/{cartItemId}', 'CartController@update')->name('cart.update')->middleware('auth');
+
+Route::get('/cart/checkOut', 'CartController@checkOut')->name('cart.checkOut')->middleware('auth');
+
+Route::resource('orders', 'OrderController')->middleware('auth');
